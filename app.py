@@ -39,7 +39,7 @@ info_keyboard = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='info')],
 
 
 class Form(StatesGroup):
-    audio: State()
+    audio = State()
 
 
 @form_router.message(CommandStart())
