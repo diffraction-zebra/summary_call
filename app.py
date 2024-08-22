@@ -34,8 +34,8 @@ dp.include_router(form_router)
 
 # Function to send the keyboard automatically when the user opens the chat
 
-info_keyboard = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='info')],
-                                              [KeyboardButton(text='summary')]])
+info_keyboard = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='/info')],
+                                              [KeyboardButton(text='/summary')]])
 
 
 class Form(StatesGroup):
