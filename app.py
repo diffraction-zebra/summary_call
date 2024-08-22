@@ -51,7 +51,7 @@ async def audio_upload(message: Message, state: FSMContext) -> None:
         await message.answer('Пожалуйста загрузите аудио.')
         return
 
-    wait_message = message.answer('Мы уже начали обрабатывать ваше аудио.')
+    wait_message = await message.answer('Мы уже начали обрабатывать ваше аудио.')
 
     # download file
     file_id = message.audio.file_id
@@ -61,14 +61,13 @@ async def audio_upload(message: Message, state: FSMContext) -> None:
 
     # transcribe
     buffer = io.BytesIO()
-    buffer.name = 'audio.ogg'
+    buffer.name = 'audio.mp3'
     buffer.write(file.read())
     transcription = transcribe(buffer)
     # summarize
     summary = summarize(transcription)
 
     await bot.delete_message(chat_id=wait_message.chat.id, message_id=wait_message.message_id)
-
     await message.answer(summary)
 
     await state.clear()

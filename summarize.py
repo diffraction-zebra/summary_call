@@ -3,7 +3,13 @@ from openai import OpenAI
 
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
-system_prompt = ''
+system_prompt = '''You are an assistant that helps in summarization of calls.
+You will got the call from a user and you need to summarize it following such parts:
+1. What was agreed upon?
+2. What was discussed?
+3. Who's doing what?
+
+Your summarization should be obligatory written in Russian.'''
 
 
 def summarize(call: str) -> str:
