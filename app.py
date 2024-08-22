@@ -18,6 +18,7 @@ from aiogram.types import (
 from speech_model import transcribe
 from summarize import summarize
 
+
 class Form(StatesGroup):
     audio = State()
 
@@ -39,7 +40,7 @@ async def command_start(message: Message, state: FSMContext) -> None:
     # initialize context
     await state.update_data(book=None, assessments=[], questions=[])
     # answer
-    await message.answer("Привет, загрузи аудио для суммаризации.")
+    await message.answer("Добрый день, загрузите аудио для суммаризации.")
     # route
     await state.set_state(Form.audio)
 
