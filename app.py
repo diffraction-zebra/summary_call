@@ -61,7 +61,12 @@ async def audio_upload(message: Message, state: FSMContext) -> None:
     file_id = message.audio.file_id
     file_info = await bot.get_file(file_id)
     file_path = file_info.file_path
-    file = await bot.download_file(file_path)
+    try:
+        file = await bot.download_file(file_path)
+    except Exception as e:
+        await message.answer('''На данный момент мы не можем обрабатывать файлы больше 20 МБ. Это ограничение не наше, 
+а телеграмма. Попробуйте обрезать или сжать файл.''')
+        return
 
     # transcribe
     buffer = io.BytesIO()
