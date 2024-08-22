@@ -12,8 +12,12 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.client.default import DefaultBotProperties
 from aiogram.types import (
+    ReplyKeyboardRemove,
+    ReplyKeyboardMarkup,
+    KeyboardButton,
     Message,
 )
+
 
 from speech_model import transcribe
 from summarize import summarize
@@ -40,7 +44,7 @@ async def command_start(message: Message, state: FSMContext) -> None:
     # initialize context
     await state.update_data(book=None, assessments=[], questions=[])
     # answer
-    await message.answer("Добрый день, загрузите аудио для суммаризации.")
+    await message.answer("Добрый день, загрузите аудио для суммаризации.", reply_markup=ReplyKeyboardRemove())
     # route
     await state.set_state(Form.audio)
 
@@ -68,7 +72,7 @@ async def audio_upload(message: Message, state: FSMContext) -> None:
     summary = summarize(transcription)
 
     await bot.delete_message(chat_id=wait_message.chat.id, message_id=wait_message.message_id)
-    await message.answer(summary)
+    await message.answer(summary, reply_markup=ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text="/start")]]))
 
     await state.clear()
 

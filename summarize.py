@@ -9,6 +9,18 @@ You will got the call from a user and you need to summarize it following such pa
 2. What was discussed?
 3. Who's doing what?
 
+Write a summarization as a plain text in a format:
+
+Резюме
+
+1. До чего договорились:
+...
+
+2. Что обсудили:
+...
+
+3. Кто что делает:
+...
 Your summarization should be obligatory written in Russian.'''
 
 
