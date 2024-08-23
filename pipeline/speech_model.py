@@ -6,6 +6,8 @@ model_name = 'thomasmol/whisper-diarization'
 
 client = replicate.Client(api_token=os.environ["REPLICATE_API_KEY"])
 
+accepted_formats = ['.mp3']
+
 
 def transcribe(audio: IO[bytes], num_speakers=2) -> str:
     output = client.run(
