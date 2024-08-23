@@ -16,9 +16,10 @@ if 'summary' not in st.session_state:
 
 st.header('MentorSummarize Demo')
 
-st.write('''Я - помощник в суммаризации звонков от компании MetaMentor. 
-Загрузите свой аудио, чтобы мы начали анализ.''')
 if st.session_state['state'] == 'upload':
+    st.write('''Я - помощник в суммаризации звонков от компании MetaMentor. 
+    Загрузите свой аудио, чтобы мы начали анализ.''')
+
     uploaded_file = st.file_uploader(
         "Choose an audio file", accept_multiple_files=False
     )
