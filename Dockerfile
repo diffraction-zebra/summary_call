@@ -7,4 +7,4 @@ COPY requirements.txt ./requirements.txt
 RUN pip install -r requirements.txt
 COPY . .
 
-ENTRYPOINT ["python", "app.py"]
+ENTRYPOINT ["streamlit", "run", "app.py"]
