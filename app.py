@@ -11,7 +11,13 @@ if 'state' not in st.session_state:
     st.session_state['state']: Literal['upload', 'summarize'] = 'upload'
 if 'audio' not in st.session_state:
     st.session_state['audio']: IO[bytes] | None = None
+if 'summary' not in st.session_state:
+    st.session_state['summary']: str | None = None
 
+st.header('MentorSummarize Demo')
+
+st.write('''Я - помощник в суммаризации звонков от компании MetaMentor. 
+Загрузите свой аудио, чтобы мы начали анализ.''')
 if st.session_state['state'] == 'upload':
     uploaded_file = st.file_uploader(
         "Choose an audio file", accept_multiple_files=False
@@ -30,8 +36,10 @@ if st.session_state['state'] == 'upload':
             st.rerun()
 
 elif st.session_state['state'] == 'summarize':
-    with st.spinner('Мы уже начали обрабатывать ваше аудио.'):
-        summary = run_pipeline(st.session_state['audio'])
+    if st.session_state['summary'] is None:
+        with st.spinner('Мы уже начали обрабатывать ваше аудио.'):
+            st.session_state['summary'] = run_pipeline(st.session_state['audio'])
+    summary = st.session_state['summary']
     st.code(summary, language="markdown")
 
     back = st.button('Обработать другое аудио')
@@ -39,4 +47,5 @@ elif st.session_state['state'] == 'summarize':
     if back:
         st.session_state['state'] = 'upload'
         st.session_state['audio'] = None
+        st.session_state['summary'] = None
         st.rerun()
