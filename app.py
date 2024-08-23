@@ -25,6 +25,7 @@ if st.session_state['state'] == 'upload':
         elif pathlib.Path(uploaded_file.name).suffix not in accepted_formats:
             st.write(f'''На данный момент мы поддерживаем только определенные форматы аудио: {' '.join(accepted_formats)}. Попробуйте перeвести аудио в допустимый формат.''')
         else:
+            st.session_state['state'] = 'summarize'
             st.session_state['audio'] = uploaded_file
             st.rerun()
 
