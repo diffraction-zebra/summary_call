@@ -26,6 +26,7 @@ if st.session_state['state'] == 'upload':
             st.write(f'''На данный момент мы поддерживаем только определенные форматы аудио: {' '.join(accepted_formats)}. Попробуйте перeвести аудио в допустимый формат.''')
         else:
             st.session_state['audio'] = uploaded_file
+            st.rerun()
 
 elif st.session_state['state'] == 'summarize':
     with st.spinner('Мы уже начали обрабатывать ваше аудио.'):
